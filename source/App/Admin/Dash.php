@@ -122,6 +122,14 @@ class Dash extends Admin
                             $value += $selectedTickets[$i]->value;
                         }
                     }
+                } elseif ($data['situation'] === 'protestedAgreed') {
+                    $selectedTickets = (new Ticket())->find("due_date BETWEEN :sd AND :dd AND situation = 'protestedAgreed'", "sd={$_SESSION['firstFilter'][0]}&dd={$_SESSION['firstFilter'][1]}")->fetch(true);
+                    $qntdTicket = ($selectedTickets) ? count($selectedTickets) : 0;
+                    if ($selectedTickets) {
+                        for ($i = 0; $i < count($selectedTickets); $i++) {
+                            $value += $selectedTickets[$i]->value;
+                        }
+                    }
                 } elseif ($data['situation'] === 'all') {
                     $selectedTickets = (new Ticket())->find("due_date BETWEEN :sd AND :dd AND (situation != 'agreed')", "sd={$_SESSION['firstFilter'][0]}&dd={$_SESSION['firstFilter'][1]}")->fetch(true);
                     $qntdTicket = ($selectedTickets) ? count($selectedTickets) : 0;
