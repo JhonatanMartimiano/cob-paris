@@ -20,50 +20,10 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <form class="form-inline mb-1" action="<?= url('/admin/users/home'); ?>" method="post">
-                                <div class="nav-search">
-                                    <input type="search" class="form-control header-search" name="s"
-                                        value="<?= $search; ?>" placeholder="Buscar…" aria-label="Search">
-                                    <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
-                                </div>
-                            </form>
-                            <table class="table table-bordered border-top mb-0">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Nome</th>
-                                        <th>Perfil de Acesso</th>
-                                        <th>E-mail</th>
-                                        <th>Ações</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php if ($users): ?>
-                                        <?php foreach ($users as $user): ?>
-                                            <tr>
-                                                <th scope="row"><?= $user->id; ?></th>
-                                                <td><?= $user->fullName(); ?></td>
-                                                <td><?= ($user->level >=5) ? "Admin" : "Usuário"; ?></td>
-                                                <td><?= $user->email; ?></td>
-                                                <td align="center">
-                                                    <a href="<?= url('/admin/users/user/'.$user->id); ?>"
-                                                        class="btn btn-info btn-sm" title="Editar"><i
-                                                            class="fa fa-pencil"></i></a>
-
-                                                    <a href="#" class="btn btn-danger btn-sm"
-                                                        data-post="<?= url("/admin/users/user/{$user->id}"); ?>"
-                                                        data-action="delete"
-                                                        data-confirm="ATENÇÃO: Tem certeza que deseja excluir o usuário e todos os dados relacionados a ele? Essa ação não pode ser feita!"
-                                                        data-user_id="<?= $user->id; ?>" title="Excluir"><i
-                                                            class="fa fa-trash"></i></a>
-                                                </td>
-                                            </tr>
-                                        <?php endforeach; ?>
-                                    <?php endif; ?>
-                                </tbody>
-                            </table>
+                            <div class="alert alert-warning">
+                                <h1 class="text-center text-uppercase font-weight-bold text-white m-0">Área em Manutenção!</h1>
+                            </div>
                         </div>
-                        <?= $paginator; ?>
                     </div>
                 </div>
             </div>
