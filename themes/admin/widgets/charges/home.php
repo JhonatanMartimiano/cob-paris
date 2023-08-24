@@ -183,7 +183,8 @@
                                                     <td align="center">
                                                         <a href="<?= url('/admin/charges/charge/' . $ticket->id); ?>" class="btn btn-dark btn-sm" title="Visualizar"><i class="fa fa-eye"></i></a>
                                                     </td>
-                                                </tr><?php elseif ($ticket->situation == 'protestedAgreed') : ?>
+                                                </tr>
+                                            <?php elseif ($ticket->situation == 'protestedAgreed') : ?>
                                                 <tr align="center" style="background-color: brown; color: white;">
                                                     <th scope="row" class="text-white"><?= $ticket->id; ?></th>
                                                     <td><?= $ticket->getClient()->name; ?></td>

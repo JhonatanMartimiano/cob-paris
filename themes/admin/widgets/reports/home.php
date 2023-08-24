@@ -3,10 +3,10 @@
 <div class="app-content  my-3 my-md-5">
     <div class="side-app">
         <div class="page-header">
-            <h4 class="page-title">Clientes</h4>
+            <h4 class="page-title">Relatórios</h4>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="<?= url('/admin/dash/home') ?>">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Clientes</li>
+                <li class="breadcrumb-item active" aria-current="page">Relatórios</li>
             </ol>
         </div>
 
@@ -15,16 +15,12 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex justify-content-between align-items-center w-100">
-                            <h3 class="card-title">Clientes</h3>
-                            <div>
-                                <a href="<?= url('/admin/clients/client'); ?>" class="btn btn-pill btn-success"><i
-                                        class="fa fa-plus"></i> Adicionar Cliente</a>
-                            </div>
+                            <h3 class="card-title">Relatórios</h3>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <form class="form-inline mb-1" action="<?= url('/admin/clients/home'); ?>" method="post">
+                            <form class="form-inline mb-1" action="<?= url('/admin/users/home'); ?>" method="post">
                                 <div class="nav-search">
                                     <input type="search" class="form-control header-search" name="s"
                                         value="<?= $search; ?>" placeholder="Buscar…" aria-label="Search">
@@ -36,31 +32,29 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Nome</th>
-                                        <th>CPF/CNPJ</th>
+                                        <th>Perfil de Acesso</th>
+                                        <th>E-mail</th>
                                         <th>Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php if ($clients): ?>
-                                        <?php foreach ($clients as $client): ?>
+                                    <?php if ($users): ?>
+                                        <?php foreach ($users as $user): ?>
                                             <tr>
-                                                <th scope="row"><?= $client->id; ?></th>
-                                                <td><?= $client->name; ?></td>
-                                                <td class=""><?= $client->cpf_cnpj; ?></td>
+                                                <th scope="row"><?= $user->id; ?></th>
+                                                <td><?= $user->fullName(); ?></td>
+                                                <td><?= ($user->level >=5) ? "Admin" : "Usuário"; ?></td>
+                                                <td><?= $user->email; ?></td>
                                                 <td align="center">
-                                                    <a href="<?= url('/admin/clients/client/'.$client->id); ?>"
+                                                    <a href="<?= url('/admin/users/user/'.$user->id); ?>"
                                                         class="btn btn-info btn-sm" title="Editar"><i
                                                             class="fa fa-pencil"></i></a>
-                                                            
-                                                    <a href="<?= url('/admin/reports/report/'.$client->id); ?>"
-                                                        class="btn btn-purple btn-sm" title="Relatório"><i
-                                                            class="fa fa-flag"></i></a>
 
                                                     <a href="#" class="btn btn-danger btn-sm"
-                                                        data-post="<?= url("/admin/clients/client/{$client->id}"); ?>"
+                                                        data-post="<?= url("/admin/users/user/{$user->id}"); ?>"
                                                         data-action="delete"
-                                                        data-confirm="ATENÇÃO: Tem certeza que deseja excluir o cliente e todos os dados relacionados a ele? Essa ação não pode ser feita!"
-                                                        data-user_id="<?= $client->id; ?>" title="Excluir"><i
+                                                        data-confirm="ATENÇÃO: Tem certeza que deseja excluir o usuário e todos os dados relacionados a ele? Essa ação não pode ser feita!"
+                                                        data-user_id="<?= $user->id; ?>" title="Excluir"><i
                                                             class="fa fa-trash"></i></a>
                                                 </td>
                                             </tr>
