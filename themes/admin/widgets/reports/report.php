@@ -131,7 +131,7 @@
                                                     <td class="mask-money"><?= intval((date_diff_system($ticket->due_date) < 0) ? $ticket->value * 0.05 + $ticket->value + ($ticket->value * 0.0033 * abs(date_diff_system($ticket->due_date))) : 0) ?></td>
                                                 </tr>
                                             <?php elseif (date_diff_system($ticket->due_date, date_fmt('now', 'Y-m-d')) <= 3 && $ticket->situation == 'open') : ?>
-                                                <tr align="center" style="background-color: #ddd30c; color: white">
+                                                <tr align="center" style="background-color: #ffa22b; color: white">
                                                     <td><?= $ticket->id; ?></td>
                                                     <td><?= $ticket->ticket_number; ?></td>
                                                     <td><?= $ticket->bank_number; ?></td>
@@ -204,9 +204,44 @@
                         </div>
                         <?= $paginator; ?>
                     </div>
+                    <?php if ($tickets): ?>
+                        <div class="col-12 d-flex justify-content-center mb-2">
+                            <div class="border" style="height: 400px; width: 500px;">
+                                <div id="donut-chart"></div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <!--/App-Content-->
+<?php $v->start("scripts"); ?>
+    <script>
+        let donutChartDiv = document.getElementById("donut-chart");
+
+        let options = {
+            chart: {
+                type: 'donut',
+            },
+            series: [<?= $finished ?>, <?= $open ?>, <?= $due ?>, <?= $toWin ?>, <?= $agreed ?>, <?= $lowForPayment ?>, <?= $courts ?>, <?= $protested ?>, <?= $canceled ?>],
+            labels: ['Liquidado','Em Aberto', 'Vencido', 'A Vencer', 'Acordado', 'Baixa para Pagamento', 'Juizado', 'Protestado', 'Cancelado'],
+            colors: ['#05a01f', '#fff000', '#ff382b', '#ffa22b', '#1da1f3', '#4ce437', '#ff0084', '#4e012d', '#000000'],
+            responsive: [{
+                breakpoint: 480,
+                options: {
+                    chart: {
+                        width: 200
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }]
+        };
+
+        let donutChart = new ApexCharts(donutChartDiv, options);
+        donutChart.render();
+    </script>
+<?php $v->end("scripts"); ?>

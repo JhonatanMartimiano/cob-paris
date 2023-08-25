@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitccf5de538fba8f1d7f9b3a5fb839d9f6
+class ComposerStaticInita71e163957664e9a3b0eaabad1a893e2
 {
     public static $files = array (
         'e471bf351add62873bc0289ccd6a937f' => __DIR__ . '/..' . '/league/plates/src/Template/match.php',
@@ -114,9 +114,9 @@ class ComposerStaticInitccf5de538fba8f1d7f9b3a5fb839d9f6
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitccf5de538fba8f1d7f9b3a5fb839d9f6::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitccf5de538fba8f1d7f9b3a5fb839d9f6::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitccf5de538fba8f1d7f9b3a5fb839d9f6::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInita71e163957664e9a3b0eaabad1a893e2::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInita71e163957664e9a3b0eaabad1a893e2::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInita71e163957664e9a3b0eaabad1a893e2::$classMap;
 
         }, null, ClassLoader::class);
     }
