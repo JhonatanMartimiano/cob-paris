@@ -1,77 +1,79 @@
 <?php $v->layout("_admin"); ?>
-<!--App-Content-->
-<div class="app-content  my-3 my-md-5">
-    <div class="side-app">
-        <div class="page-header">
-            <h4 class="page-title">Relatórios</h4>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="<?= url('/admin/dash/home') ?>">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Relatórios</li>
-            </ol>
-        </div>
+    <!--App-Content-->
+    <div class="app-content  my-3 my-md-5">
+        <div class="side-app">
+            <div class="page-header">
+                <h4 class="page-title">Relatórios</h4>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="<?= url('/admin/dash/home') ?>">Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Relatórios</li>
+                </ol>
+            </div>
 
-        <div class="row">
-            <div class="col-md-12 col-lg-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="d-flex justify-content-between align-items-center w-100">
-                            <h3 class="card-title">Relatórios</h3>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <form>
-                                <div class="form-row">
-                                    <div class="form-group col-6">
-                                        <label for="client">Nome Completo</label>
-                                        <input type="text" value="<?= $client->name; ?>" id="client" class="form-control" disabled>
-                                    </div>
-                                    <div class="form-group col-6">
-                                        <label for="document">CPF/CNPJ</label>
-                                        <input type="text" value="<?= $client->cpf_cnpj; ?>" id="document" class="form-control" disabled>
-                                    </div>
-                                </div>
-                            </form>
-                            <div class="d-flex justify-content-center align-items-center p-2">
-                                <div class="d-flex justify-content-center align-items-center mr-5">
-                                    <span class="fa fa-circle text-success mr-1"></span>
-                                    <p class="m-0">Liquidado</p>
-                                </div>
-                                <div class="d-flex justify-content-center align-items-center mr-5">
-                                    <span class="fa fa-circle mr-1" style="color: #fff000;"></span>
-                                    <p class="m-0">Em Aberto</p>
-                                </div>
-                                <div class="d-flex justify-content-center align-items-center mr-5">
-                                    <span class="fa fa-circle text-danger mr-1"></span>
-                                    <p class="m-0">Vencido</p>
-                                </div>
-                                <div class="d-flex justify-content-center align-items-center mr-5">
-                                    <span class="fa fa-circle text-warning mr-1"></span>
-                                    <p class="m-0">A Vencer</p>
-                                </div>
-                                <div class="d-flex justify-content-center align-items-center mr-5">
-                                    <span class="fa fa-circle text-info mr-1"></span>
-                                    <p class="m-0">Acordado</p>
-                                </div>
-                                <div class="d-flex justify-content-center align-items-center mr-5">
-                                    <span class="fa fa-circle mr-1" style="color: #4ce437;"></span>
-                                    <p class="m-0">Baixa para Pagamento</p>
-                                </div>
-                                <div class="d-flex justify-content-center align-items-center mr-5">
-                                    <span class="fa fa-circle mr-1" style="color: #ff0084;"></span>
-                                    <p class="m-0">Juizado</p>
-                                </div>
-                                <div class="d-flex justify-content-center align-items-center mr-5">
-                                    <span class="fa fa-circle mr-1" style="color: #4e012d;"></span>
-                                    <p class="m-0">Protestado</p>
-                                </div>
-                                <div class="d-flex justify-content-center align-items-center">
-                                    <span class="fa fa-circle mr-1" style="color: #000;"></span>
-                                    <p class="m-0">Cancelado</p>
-                                </div>
+            <div class="row">
+                <div class="col-md-12 col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="d-flex justify-content-between align-items-center w-100">
+                                <h3 class="card-title">Relatórios</h3>
                             </div>
-                            <table class="table table-bordered border-top mb-0">
-                                <thead>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <form>
+                                    <div class="form-row">
+                                        <div class="form-group col-6">
+                                            <label for="client">Nome Completo</label>
+                                            <input type="text" value="<?= $client->name; ?>" id="client"
+                                                   class="form-control" disabled>
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label for="document">CPF/CNPJ</label>
+                                            <input type="text" value="<?= $client->cpf_cnpj; ?>" id="document"
+                                                   class="form-control" disabled>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="d-flex justify-content-center align-items-center p-2">
+                                    <div class="d-flex justify-content-center align-items-center mr-5">
+                                        <span class="fa fa-circle text-success mr-1"></span>
+                                        <p class="m-0">Liquidado</p>
+                                    </div>
+                                    <div class="d-flex justify-content-center align-items-center mr-5">
+                                        <span class="fa fa-circle mr-1" style="color: #fff000;"></span>
+                                        <p class="m-0">Em Aberto</p>
+                                    </div>
+                                    <div class="d-flex justify-content-center align-items-center mr-5">
+                                        <span class="fa fa-circle text-danger mr-1"></span>
+                                        <p class="m-0">Vencido</p>
+                                    </div>
+                                    <div class="d-flex justify-content-center align-items-center mr-5">
+                                        <span class="fa fa-circle text-warning mr-1"></span>
+                                        <p class="m-0">A Vencer</p>
+                                    </div>
+                                    <div class="d-flex justify-content-center align-items-center mr-5">
+                                        <span class="fa fa-circle text-info mr-1"></span>
+                                        <p class="m-0">Acordado</p>
+                                    </div>
+                                    <div class="d-flex justify-content-center align-items-center mr-5">
+                                        <span class="fa fa-circle mr-1" style="color: #4ce437;"></span>
+                                        <p class="m-0">Baixa para Pagamento</p>
+                                    </div>
+                                    <div class="d-flex justify-content-center align-items-center mr-5">
+                                        <span class="fa fa-circle mr-1" style="color: #ff0084;"></span>
+                                        <p class="m-0">Juizado</p>
+                                    </div>
+                                    <div class="d-flex justify-content-center align-items-center mr-5">
+                                        <span class="fa fa-circle mr-1" style="color: #4e012d;"></span>
+                                        <p class="m-0">Protestado</p>
+                                    </div>
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <span class="fa fa-circle mr-1" style="color: #000;"></span>
+                                        <p class="m-0">Cancelado</p>
+                                    </div>
+                                </div>
+                                <table class="table table-bordered border-top mb-0">
+                                    <thead>
                                     <tr align="center">
                                         <th>ID</th>
                                         <th>Número do Boleto</th>
@@ -82,8 +84,8 @@
                                         <th>Valor</th>
                                         <th>Valor com Multa/Juros</th>
                                     </tr>
-                                </thead>
-                                <tbody>
+                                    </thead>
+                                    <tbody>
                                     <?php if ($tickets) : ?>
                                         <?php foreach ($tickets as $ticket) : ?>
                                             <?php if ($ticket->situation == 'finished') : ?>
@@ -199,24 +201,24 @@
                                             <?php endif; ?>
                                         <?php endforeach; ?>
                                     <?php endif; ?>
-                                </tbody>
-                            </table>
-                        </div>
-                        <?= $paginator; ?>
-                    </div>
-                    <?php if ($tickets): ?>
-                        <div class="col-12 d-flex justify-content-center mb-2">
-                            <div class="border" style="height: 400px; width: 500px;">
-                                <div id="donut-chart"></div>
+                                    </tbody>
+                                </table>
                             </div>
+                            <?= $paginator; ?>
                         </div>
-                    <?php endif; ?>
+                        <?php if ($tickets): ?>
+                            <div class="col-12 d-flex justify-content-center mb-2">
+                                <div class="border" style="height: 400px; width: 500px;">
+                                    <div id="donut-chart"></div>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!--/App-Content-->
+    <!--/App-Content-->
 <?php $v->start("scripts"); ?>
     <script>
         let donutChartDiv = document.getElementById("donut-chart");
@@ -226,7 +228,7 @@
                 type: 'donut',
             },
             series: [<?= $finished ?>, <?= $open ?>, <?= $due ?>, <?= $toWin ?>, <?= $agreed ?>, <?= $lowForPayment ?>, <?= $courts ?>, <?= $protested ?>, <?= $canceled ?>],
-            labels: ['Liquidado','Em Aberto', 'Vencido', 'A Vencer', 'Acordado', 'Baixa para Pagamento', 'Juizado', 'Protestado', 'Cancelado'],
+            labels: ['Liquidado', 'Em Aberto', 'Vencido', 'A Vencer', 'Acordado', 'Baixa para Pagamento', 'Juizado', 'Protestado', 'Cancelado'],
             colors: ['#05a01f', '#fff000', '#ff382b', '#ffa22b', '#1da1f3', '#4ce437', '#ff0084', '#4e012d', '#000000'],
             responsive: [{
                 breakpoint: 480,

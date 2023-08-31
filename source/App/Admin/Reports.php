@@ -25,6 +25,12 @@ class Reports extends Admin
      */
     public function home(?array $data): void
     {
+        $tickets = (new Ticket())->find();
+        if (!empty($data) && !empty($data['start_date']) && !empty($data['due_date'])) {
+            $data = filter_var_array($data, FILTER_SANITIZE_STRIPPED);
+            $tickets = (new Ticket())->find('due_date BETWEEN :sd AND :dd', "sd={$data['start_date']}&dd={$data['due_date']}");
+        }
+
         //search redirect
         if (!empty($data["s"])) {
             $s = str_search($data["s"]);
@@ -33,12 +39,10 @@ class Reports extends Admin
         }
 
         $search = null;
-        $clients = (new Client())->find();
-
         if (!empty($data["search"]) && str_search($data["search"]) != "all") {
             $search = str_search($data["search"]);
-            $clients = (new Client())->find("name LIKE CONCAT('%', :s, '%') OR cpf_cnpj LIKE CONCAT('%', :s, '%')", "s={$search}");
-            if (!$clients->count()) {
+            $tickets = (new Ticket())->find("name LIKE CONCAT('%', :s, '%') OR cpf_cnpj LIKE CONCAT('%', :s, '%')", "s={$search}");
+            if (!$tickets->count()) {
                 $this->message->info("Sua pesquisa não retornou resultados")->flash();
                 redirect("/admin/reports/home");
             }
@@ -46,7 +50,7 @@ class Reports extends Admin
 
         $all = ($search ?? "all");
         $pager = new Pager(url("/admin/reports/home/{$all}/"));
-        $pager->pager($clients->count(), 20, (!empty($data["page"]) ? $data["page"] : 1));
+        $pager->pager($tickets->count(), 20, (!empty($data["page"]) ? $data["page"] : 1));
 
         $head = $this->seo->render(
             CONF_SITE_NAME . " | Relatórios",
@@ -60,7 +64,16 @@ class Reports extends Admin
             "app" => "reports/home",
             "head" => $head,
             "search" => $search,
-            "clients" => $clients->limit($pager->limit())->offset($pager->offset())->fetch(true),
+            "tickets" => $tickets->limit($pager->limit())->offset($pager->offset())->fetch(true),
+            "finished" => (new Ticket)->find('situation = :sit', "sit=finished")->count(),
+            "due" => (new Ticket)->find("due_date - CURDATE() < 0 AND (situation = 'open' OR situation = 'defeated')")->count(),
+            "agreed" => (new Ticket)->find('situation = :sit', "sit=negotiation")->count(),
+            "open" => (new Ticket)->find('situation = :sit AND due_date - CURDATE() >= 4', "sit=open")->count(),
+            "toWin" => (new Ticket)->find('situation = :sit AND due_date - CURDATE() <= 3', "sit=open")->count(),
+            "lowForPayment" => (new Ticket)->find('situation = :sit', "sit=lowForPayment")->count(),
+            "courts" => (new Ticket)->find('situation = :sit', "sit=courts")->count(),
+            "protested" => (new Ticket)->find('situation = :sit', "sit=protested")->count(),
+            "canceled" => (new Ticket)->find('situation = :sit', "sit=canceled")->count(),
             "paginator" => $pager->render()
         ]);
     }
@@ -91,7 +104,6 @@ class Reports extends Admin
             "head" => $head,
             "client" => $clientEdit,
             "tickets" => (new Ticket)->find('id_client = :idc', "idc={$clientEdit->id}")->fetch(true),
-            "ticketsCount" => (new Ticket)->find('id_client = :idc', "idc={$clientEdit->id}")->count(),
             "finished" => (new Ticket)->find('id_client = :idc AND situation = :sit', "idc={$clientEdit->id}&sit=finished")->count(),
             "due" => (new Ticket)->find("id_client = :idc AND due_date - CURDATE() < 0 AND (situation = 'open' OR situation = 'defeated')", "idc={$clientEdit->id}")->count(),
             "agreed" => (new Ticket)->find('id_client = :idc AND situation = :sit', "idc={$clientEdit->id}&sit=negotiation")->count(),
@@ -100,7 +112,7 @@ class Reports extends Admin
             "lowForPayment" => (new Ticket)->find('id_client = :idc AND situation = :sit', "idc={$clientEdit->id}&sit=lowForPayment")->count(),
             "courts" => (new Ticket)->find('id_client = :idc AND situation = :sit', "idc={$clientEdit->id}&sit=courts")->count(),
             "protested" => (new Ticket)->find('id_client = :idc AND situation = :sit', "idc={$clientEdit->id}&sit=protested")->count(),
-            "canceled" => (new Ticket)->find('id_client = :idc AND situation = :sit', "idc={$clientEdit->id}&sit=canceled")->count(),
+            "canceled" => (new Ticket)->find('id_client = :idc AND situation = :sit', "idc={$clientEdit->id}&sit=canceled")->count()
         ]);
     }
 }
