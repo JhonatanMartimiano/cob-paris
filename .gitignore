@@ -1,3 +1,6 @@
-vendor
+.docker
 .vscode
-.idea
+vendor
+.htaccess
+*.lock
+docker-compose.yml
