@@ -235,13 +235,6 @@ class Dash extends Admin
      */
     public function logoff(): void
     {
-        if ($this->user->id != 1) {
-            $log = (new Log());
-            $log->user_id = $this->user->id;
-            $log->action = 'Logoff';
-            $log->save();
-        }
-
         $this->message->success("Você saiu com sucesso {$this->user->first_name}.")->flash();
 
         Auth::logout();

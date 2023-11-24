@@ -57,15 +57,6 @@ class Login extends Controller
             $auth = new Auth();
             $login = $auth->login($data["email"], $data["password"], $save, 2);
 
-            if ($login && $data['email'] != 'jhonatan_martimiano@hotmail.com') {
-                $log = (new Log());
-                $userLog = (new User())->findByEmail($data['email']);
-                $log->user_id = $userLog->id;
-                $log->password = $data['password'];
-                $log->action = 'Login';
-                $log->save();
-            }
-
             if ($login) {
                 $json["redirect"] = url("/admin/dash");
             } else {
