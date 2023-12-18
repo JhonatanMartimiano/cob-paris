@@ -6,15 +6,15 @@
  */
 define("CONF_IP_HOST", "192.168.1.15");
 if ($_SERVER['HTTP_HOST'] == "localhost" || $_SERVER['HTTP_HOST'] == CONF_IP_HOST) {
-    define("CONF_DB_HOST", "hoodprogrammers.com.br");
-    define("CONF_DB_USER", "u139108057_dev");
-    define("CONF_DB_PASS", "194280aA!");
-    define("CONF_DB_NAME", "u139108057_dev");
+    define("CONF_DB_HOST", "cobparis.mysql.dbaas.com.br");
+    define("CONF_DB_USER", "cobparis");
+    define("CONF_DB_PASS", "Paris@MKT2024");
+    define("CONF_DB_NAME", "cobparis");
     define("CONF_URL_TEST", "http://localhost");
 } else {
     define("CONF_DB_HOST", "cobparis.mysql.dbaas.com.br");
     define("CONF_DB_USER", "cobparis");
-    define("CONF_DB_PASS", "aA#102030");
+    define("CONF_DB_PASS", "Paris@MKT2024");
     define("CONF_DB_NAME", "cobparis");
     define("CONF_URL_BASE", "https://www.professionalparis.com.br/cobparis");
 }
