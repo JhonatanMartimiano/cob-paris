@@ -108,6 +108,14 @@ class Tickets extends Admin
                 $ticketCreate->id_agreement = $data["id_agreement"];
             }
 
+            $currentDate = date_fmt('now', 'Y-m-d');
+            $dueDate = date_fmt_back($data["due_date"]);
+            if ($currentDate > $dueDate) {
+                $json["message"] = $this->message->warning('Data de vencimento incorreta.')->render();
+                echo json_encode($json);
+                return;
+            }
+
             $searchTicket = (new Ticket)->find('ticket_number = :tn', "tn={$ticketCreate->ticket_number}")->count();
 
             if (!$searchTicket) {
@@ -151,6 +159,14 @@ class Tickets extends Admin
             $ticketUpdate->situation = 'open';
             if ($data["id_agreement"]) {
                 $ticketUpdate->id_agreement = $data["id_agreement"];
+            }
+
+            $currentDate = date_fmt('now', 'Y-m-d');
+            $dueDate = date_fmt_back($data["due_date"]);
+            if ($currentDate > $dueDate) {
+                $json["message"] = $this->message->warning('Data de vencimento incorreta.')->render();
+                echo json_encode($json);
+                return;
             }
 
             $searchTicket = (new Ticket)->find('ticket_number = :tn', "tn={$ticketUpdate->ticket_number}")->count();
